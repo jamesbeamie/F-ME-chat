@@ -14,6 +14,10 @@ app.use(router);
 //integrating socket
 io.on("connection", socket => {
   console.log("new socket connection");
+  //accessing join from the frontend
+  socket.on("join", ({ name, room }) => {
+    console.log(name, room);
+  });
   socket.on("disconnect", () => {
     console.log("user has left");
   });

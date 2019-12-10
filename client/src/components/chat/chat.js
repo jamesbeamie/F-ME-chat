@@ -8,6 +8,7 @@ const Chat = ({ location }) => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const endPoint = "localhost:5000";
+
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
     console.log(location.search);
@@ -21,6 +22,10 @@ const Chat = ({ location }) => {
     //Emitting a specific event on hooks
 
     socket.emit("join", { name, room });
+    return () => {
+      socket.emit("disconnect");
+      socket.off();
+    };
   }, [endPoint, useEffect]);
 
   return <h1>Chat</h1>;
