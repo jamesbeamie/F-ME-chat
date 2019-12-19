@@ -22,22 +22,22 @@ app.use(router);
 io.on("connection", socket => {
   //accessing join from the frontend
   socket.on("join", ({ name, room }, callback) => {
-    const { error, newUser } = addUser({ id: socket.id, name, room });
+    const { error, user } = addUser({ id: socket.id, name, room });
     if (error) {
       return callback(error);
     }
     // system messages
     socket.emit("message", {
       user: "admin",
-      text: `${newUser.name}, welcome to ${newUser.room}`
+      text: `${user.name}, welcome to ${user.room}`
     });
     //broadcast sends message to everyone on the chanel
     //broadcast.to sends message to specific channel
     socket.broadcast
-      .to(newUser.room)
-      .emit("message", { user: "admin", text: `${newUser.name} has joined` });
+      .to(user.room)
+      .emit("message", { user: "admin", text: `${user.name} has joined` });
     //socket.join joins a user in a room
-    socket.join(newUser.room);
+    socket.join(user.room);
     callback();
   });
 
