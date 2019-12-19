@@ -39,6 +39,27 @@ const Chat = ({ location }) => {
     });
   }, [messages]);
 
-  return <h1>Chat</h1>;
+  //sending message
+  const sendMessage = event => {
+    event.preventDefault();
+    if (message) {
+      //sendMessage is an emit listener from the server
+      socket.emit("sendMessage", message, () => setMessage(""));
+    }
+  };
+
+  console.log("ma-messo", message, messages);
+
+  return (
+    <div className='outerContainer'>
+      <div className='container'>
+        <input
+          value={message}
+          onChange={event => setMessage(event.target.value)}
+          onKeyPress={event => (event.key === "Enter" ? sendMessage() : null)}
+        />
+      </div>
+    </div>
+  );
 };
 export default Chat;
