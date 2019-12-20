@@ -38,6 +38,10 @@ io.on("connection", socket => {
       .emit("message", { user: "admin", text: `${user.name} has joined` });
     //socket.join joins a user in a room
     socket.join(user.room);
+    io.to(user.room).emit("roomData", {
+      room: user.room,
+      users: getUsersInSpecificRoom(user.room)
+    });
     callback();
   });
 
@@ -46,6 +50,10 @@ io.on("connection", socket => {
     const user = getUser(socket.id);
 
     io.to(user.room).emit("message", { user: user.name, text: message });
+    io.to(user.room).emit("roomData", {
+      room: user.room,
+      users: getUsersInSpecificRoom(user.room)
+    });
     callback();
   });
 
