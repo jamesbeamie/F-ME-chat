@@ -59,12 +59,12 @@ const Chat = ({ location }) => {
     <div className='outerContainer'>
       <div className='container'>
         <InfoBar room={room} />
+        <Messages messages={messages} name={name} />
         <InputComponent
           message={message}
           setMessage={setMessage}
           sendMessage={sendMessage}
         />
-        <Messages messages={messages} name={name} />
       </div>
     </div>
   );
