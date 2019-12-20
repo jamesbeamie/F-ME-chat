@@ -25,12 +25,12 @@ const Chat = ({ location }) => {
     setRoom(room);
     //Emitting a specific event on hooks
 
-    socket.emit("join", { name, room });
+    socket.emit("join", { name, room }, () => {});
     return () => {
       socket.emit("disconnect");
       socket.off();
     };
-  }, [endPoint, useEffect]);
+  }, [endPoint, location.search]);
 
   // use effect to handle messages
   useEffect(() => {
@@ -41,7 +41,7 @@ const Chat = ({ location }) => {
 
   //sending message
   const sendMessage = event => {
-    event.preventDefault();
+    // event.preventDefault();
     if (message) {
       //sendMessage is an emit listener from the server
       socket.emit("sendMessage", message, () => setMessage(""));

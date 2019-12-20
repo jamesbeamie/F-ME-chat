@@ -11,10 +11,10 @@ const addUser = ({ id, name, room }) => {
     return { error: "username already taken" };
   }
 
-  const newUser = { id, name, room };
+  const user = { id, name, room };
 
-  users.push(newUser);
-  return newUser;
+  users.push(user);
+  return { user };
 };
 
 const getUser = id => {
