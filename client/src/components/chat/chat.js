@@ -4,6 +4,7 @@ import io from "socket.io-client";
 
 import "./chat.css";
 import InfoBar from "../infobar/infoBar";
+import InputComponent from "../input/inputComponent";
 
 let socket;
 
@@ -19,7 +20,7 @@ const Chat = ({ location }) => {
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
     console.log(location.search);
-    console.log(name, room);
+    console.log("Majina", name, room);
 
     socket = io(endPoint);
     console.log("@@@@@@", socket);
@@ -44,7 +45,7 @@ const Chat = ({ location }) => {
 
   //sending message
   const sendMessage = event => {
-    // event.preventDefault();
+    event.preventDefault();
     if (message) {
       //sendMessage is an emit listener from the server
       socket.emit("sendMessage", message, () => setMessage(""));
@@ -57,11 +58,11 @@ const Chat = ({ location }) => {
     <div className='outerContainer'>
       <div className='container'>
         <InfoBar room={room} />
-        {/* <input
-          value={message}
-          onChange={event => setMessage(event.target.value)}
-          onKeyPress={event => (event.key === "Enter" ? sendMessage() : null)}
-        /> */}
+        <InputComponent
+          message={message}
+          setMessage={setMessage}
+          sendMessage={sendMessage}
+        />
       </div>
     </div>
   );
