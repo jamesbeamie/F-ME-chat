@@ -15,7 +15,7 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const endPoint = "localhost:5000";
+  const endPoint = "https://bhacheswa-api.herokuapp.com/";
 
   // use effect to handle user and room
   useEffect(() => {
