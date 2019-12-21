@@ -1,5 +1,6 @@
 const express = require("express");
 const socketio = require("socket.io");
+const cors = require("cors");
 const http = require("http");
 const router = require("./router");
 
@@ -17,6 +18,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 app.use(router);
+app.use(cors());
 
 //integrating socket
 io.on("connection", socket => {
