@@ -9,7 +9,6 @@
   },
   "author": "JAMES",
   "license": "MIT",
-  //node version
   "engines": {
     "node": "12.x"
   },
