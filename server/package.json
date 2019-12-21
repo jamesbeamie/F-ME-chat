@@ -4,11 +4,15 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start ": "nodemon server.js",
+    "start ": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "JAMES",
   "license": "MIT",
+  //node version
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
